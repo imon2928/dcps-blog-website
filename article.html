@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article — মনপাঠ</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1B4332; --forest-deep:#102A20; --sage:#74A57F;
+  --sage-soft:#AEC9A8; --paper:#F6F3EA; --paper-line:#E4DEC9;
+  --ink:#20251F; --ink-soft:#52584C; --coral:#C97B5C; --mint:#E9EFE3;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{background:var(--paper); color:var(--ink); font-family:'Hind Siliguri','Inter',sans-serif; min-height:100vh;}
+.ruled-top{height:8px; background:repeating-linear-gradient(90deg,var(--forest) 0 22px,transparent 0 28px); opacity:.85;}
+
+header{background:var(--forest); color:var(--mint); padding:16px 6vw; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:50; border-bottom:3px solid var(--forest-deep);}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+.brand img{width:44px; height:44px;}
+.brand-text .site-name{font-family:'Tiro Bangla',serif; font-size:1.1rem; color:#fff;}
+.brand-text .sub{font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sage-soft);}
+.nav-actions{display:flex; gap:10px;}
+.nav-btn{color:var(--mint); text-decoration:none; font-size:.84rem; font-weight:600; display:flex; align-items:center; gap:5px; border:1px solid rgba(255,255,255,.25); padding:7px 16px; border-radius:20px; cursor:pointer; background:transparent; transition:.2s;}
+.nav-btn:hover{background:rgba(255,255,255,.1);}
+
+/* article hero */
+.article-hero{background:var(--forest-deep); padding:52px 6vw 44px; color:#fff;}
+.article-hero-inner{max-width:780px; margin:0 auto;}
+.breadcrumb{font-size:.74rem; color:var(--sage-soft); margin-bottom:16px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+.breadcrumb a{color:var(--sage-soft); text-decoration:none;}
+.breadcrumb a:hover{color:#fff;}
+.content-type-badge{display:inline-block; padding:5px 14px; border-radius:20px; font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin-bottom:18px;}
+.badge-neuro{background:#2D6A4F; color:#B7E4C7;}
+.badge-psychological{background:#5C3317; color:#F4C097;}
+.badge-dsm5{background:#1A3A2A; color:#AEC9A8; border:1px solid #3A6B50;}
+.article-title{font-family:'Tiro Bangla',serif; font-size:clamp(1.6rem,3vw,2.4rem); line-height:1.3; margin-bottom:18px; color:#fff;}
+.article-meta{display:flex; align-items:center; gap:20px; font-size:.8rem; color:var(--sage-soft); flex-wrap:wrap;}
+.meta-item{display:flex; align-items:center; gap:5px;}
+
+/* content area */
+.article-wrap{max-width:780px; margin:0 auto; padding:52px 6vw 90px;}
+
+/* loading state */
+.loading{text-align:center; padding:80px 20px;}
+.loading-spinner{width:44px; height:44px; border:3px solid var(--paper-line); border-top-color:var(--forest); border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 20px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading p{color:var(--ink-soft); font-size:.95rem; margin-top:10px;}
+.loading .hint{font-size:.8rem; color:var(--sage); margin-top:8px;}
+
+/* error state */
+.error-box{background:#fff; border:1px solid #f0c4b8; border-radius:4px; padding:24px; color:#8B3A20;}
+
+/* rendered article content */
+#article-content{display:none;}
+#article-content h2{
+  font-family:'Tiro Bangla',serif; font-size:1.45rem; color:var(--forest-deep);
+  margin:36px 0 16px; padding-bottom:10px; border-bottom:1.5px solid var(--paper-line);
+}
+#article-content h3{
+  font-family:'Tiro Bangla',serif; font-size:1.15rem; color:var(--forest);
+  margin:28px 0 12px;
+}
+#article-content p{
+  font-size:1rem; line-height:1.85; color:var(--ink); margin:0 0 18px;
+}
+#article-content ul, #article-content ol{
+  padding-left:22px; margin:0 0 18px;
+}
+#article-content li{
+  font-size:1rem; line-height:1.75; color:var(--ink); margin-bottom:6px;
+}
+#article-content strong{color:var(--forest-deep); font-weight:700;}
+#article-content em{color:var(--coral);}
+#article-content blockquote{
+  border-left:3px solid var(--forest); padding:14px 20px; margin:24px 0;
+  background:#fff; color:var(--ink-soft); font-style:italic;
+}
+#article-content .dsm-criteria{
+  background:#fff; border:1px solid var(--paper-line); border-radius:4px;
+  padding:22px; margin:20px 0;
+}
+#article-content .dsm-criteria h4{
+  font-family:'Tiro Bangla',serif; color:var(--forest); font-size:1rem;
+  margin:0 0 12px; padding-bottom:8px; border-bottom:1px dashed var(--paper-line);
+}
+#article-content .dsm-criteria p{font-size:.92rem; margin-bottom:10px;}
+#article-content .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 20px;}
+#article-content .tag{
+  display:inline-block; background:var(--mint); color:var(--forest);
+  font-size:.74rem; font-weight:600; padding:4px 12px; border-radius:20px;
+}
+#article-content hr{border:none; border-top:1px dashed var(--paper-line); margin:30px 0;}
+
+/* related section */
+.related{background:#fff; border-top:1px solid var(--paper-line); padding:40px 6vw;}
+.related-inner{max-width:780px; margin:0 auto;}
+.related h3{font-family:'Tiro Bangla',serif; color:var(--forest-deep); font-size:1.1rem; margin-bottom:20px;}
+.related-cards{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+.related-card{background:var(--paper); border:1px solid var(--paper-line); padding:16px; cursor:pointer; border-radius:4px; transition:.15s;}
+.related-card:hover{border-color:var(--sage); background:var(--mint);}
+.related-card .rc-type{font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--coral); margin-bottom:6px;}
+.related-card .rc-title{font-family:'Tiro Bangla',serif; font-size:.92rem; color:var(--forest-deep); line-height:1.4;}
+</style>
+</head>
+<body>
+<div class="ruled-top"></div>
+<header>
+  <a class="brand" href="dcps.html">
+    <img src="log - transparent.png" alt="DCPS">
+    <div class="brand-text">
+      <div class="site-name">মনপাঠ</div>
+      <div class="sub">DCPS</div>
+    </div>
+  </a>
+  <div class="nav-actions">
+    <button class="nav-btn" id="back-to-cat" onclick="">← সেক্টরে ফিরুন</button>
+    <button class="nav-btn" onclick="window.location.href='dcps.html'">মূল পাতা</button>
+  </div>
+</header>
+
+<div class="article-hero">
+  <div class="article-hero-inner">
+    <div class="breadcrumb">
+      <a href="dcps.html">মনপাঠ</a>
+      <span>›</span>
+      <a id="bc-cat" href="#">—</a>
+      <span>›</span>
+      <span id="bc-disorder">—</span>
+    </div>
+    <span class="content-type-badge" id="ct-badge">—</span>
+    <h1 class="article-title" id="article-title">লোড হচ্ছে...</h1>
+    <div class="article-meta">
+      <span class="meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        <span>ঢাকা কলেজ সাইকোলজি সোসাইটি</span>
+      </span>
+      <span class="meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg>
+        <span>DSM-5 ভিত্তিক</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="article-wrap">
+  <div class="loading" id="loading-state">
+    <div class="loading-spinner"></div>
+    <p id="loading-msg">কন্টেন্ট তৈরি হচ্ছে...</p>
+    <p class="hint">AI দিয়ে বাংলায় বিস্তারিত কন্টেন্ট তৈরি হচ্ছে, একটু অপেক্ষা করুন।</p>
+  </div>
+  <div id="error-state" style="display:none">
+    <div class="error-box">
+      <strong>কন্টেন্ট লোড করা যায়নি।</strong>
+      <p style="margin-top:8px">দুঃখিত, এই মুহূর্তে কন্টেন্ট তৈরি করতে সমস্যা হচ্ছে।</p>
+      <button onclick="generateContent()" style="margin-top:14px; padding:10px 20px; background:var(--forest); color:#fff; border:none; border-radius:20px; cursor:pointer; font-family:inherit;">আবার চেষ্টা করুন</button>
+    </div>
+  </div>
+  <div id="article-content"></div>
+</div>
+
+<div class="related" id="related-section" style="display:none">
+  <div class="related-inner">
+    <h3>এই ডিসঅর্ডারের অন্য কন্টেন্ট পড়ুন</h3>
+    <div class="related-cards" id="related-cards"></div>
+  </div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const catId = params.get('cat') || 'intellectual-disabilities';
+const disorderId = params.get('disorder') || 'intellectual-disability';
+const contentType = params.get('type') || 'neuro';
+
+const CAT_NAMES = {
+  'psychological-content':'সাইকোলজিকাল কন্টেন্ট',
+  'intellectual-disabilities':'বুদ্ধিবৃত্তিক প্রতিবন্ধকতা',
+  'communication-disorders':'যোগাযোগজনিত ব্যাধি',
+  'autism-spectrum':'অটিজম স্পেকট্রাম ডিসঅর্ডার',
+  'adhd':'মনোযোগ ঘাটতি ও অতিসক্রিয়তা (ADHD)',
+  'specific-learning':'নির্দিষ্ট শেখার ব্যাধি',
+  'motor-disorders':'মোটর ডিসঅর্ডার',
+  'schizophrenia-spectrum':'সিজোফ্রেনিয়া স্পেকট্রাম',
+  'bipolar-disorders':'বাইপোলার ও সংশ্লিষ্ট ব্যাধি',
+  'depressive-disorders':'বিষণ্নতাজনিত ব্যাধি',
+  'anxiety-disorders':'উদ্বেগজনিত ব্যাধি',
+  'ocd':'অবসেসিভ-কম্পালসিভ ডিসঅর্ডার',
+  'trauma-disorders':'ট্রমা ও স্ট্রেসজনিত ব্যাধি',
+  'dissociative-disorders':'ডিসোসিয়েটিভ ডিসঅর্ডার',
+  'somatic-disorders':'সোমাটিক উপসর্গজনিত ব্যাধি',
+  'eating-disorders':'খাদ্যগ্রহণজনিত ব্যাধি',
+  'sleep-disorders':'ঘুমজনিত ব্যাধি',
+  'personality-disorders':'ব্যক্তিত্বজনিত ব্যাধি',
+  'neurocognitive-disorders':'নিউরোকগনিটিভ ডিসঅর্ডার',
+};
+
+const TYPE_LABELS = {
+  neuro: {bn:'স্নায়ুবিক কারণ', badge:'badge-neuro', emoji:'🧠'},
+  psychological: {bn:'সাইকোলজিকাল কারণ', badge:'badge-psychological', emoji:'🧩'},
+  dsm5: {bn:'DSM-5 ডায়াগনসিস ক্রাইটেরিয়া', badge:'badge-dsm5', emoji:'📋'},
+};
+
+const DISORDER_NAMES_BN = {
+  'intellectual-disability':'বুদ্ধিবৃত্তিক অক্ষমতা (IDD)',
+  'global-developmental-delay':'বৈশ্বিক বিকাশগত বিলম্ব',
+  'unspecified-intellectual-disability':'অনির্দিষ্ট বুদ্ধিবৃত্তিক অক্ষমতা',
+  'language-disorder':'ভাষাগত ব্যাধি',
+  'speech-sound-disorder':'বাক ধ্বনিগত ব্যাধি',
+  'childhood-onset-fluency':'শৈশব-শুরু ফ্লুয়েন্সি ব্যাধি',
+  'social-communication':'সামাজিক যোগাযোগ ব্যাধি',
+  'unspecified-communication':'অনির্দিষ্ট যোগাযোগ ব্যাধি',
+  'asd-level1':'ASD মাত্রা ১',
+  'asd-level2':'ASD মাত্রা ২',
+  'asd-level3':'ASD মাত্রা ৩',
+  'adhd-inattentive':'ADHD মনোযোগহীনতা প্রধান',
+  'adhd-hyperactive':'ADHD অতিসক্রিয়তা প্রধান',
+  'adhd-combined':'ADHD মিশ্র',
+  'adhd-other':'অন্যান্য ADHD',
+  'dyslexia':'ডিসলেক্সিয়া',
+  'dysgraphia':'ডিসগ্রাফিয়া',
+  'dyscalculia':'ডিসক্যালকুলিয়া',
+  'developmental-coordination':'বিকাশমূলক সমন্বয় ব্যাধি',
+  'stereotypic-movement':'ছকবাঁধা গতি ব্যাধি',
+  'tourettes':"টুরেট'স ডিসঅর্ডার",
+  'persistent-tic':'স্থায়ী টিক ব্যাধি',
+  'provisional-tic':'অস্থায়ী টিক ব্যাধি',
+  'schizotypal-pd':'স্কিজোটাইপাল পার্সোনালিটি ডিসঅর্ডার',
+  'delusional-disorder':'বিভ্রান্তিমূলক ব্যাধি',
+  'brief-psychotic':'সংক্ষিপ্ত সাইকোটিক ব্যাধি',
+  'schizophreniform':'স্কিজোফ্রেনিফর্ম ডিসঅর্ডার',
+  'schizophrenia':'সিজোফ্রেনিয়া',
+  'schizoaffective':'স্কিজোঅ্যাফেক্টিভ ডিসঅর্ডার',
+  'bipolar-1':'বাইপোলার ডিসঅর্ডার I',
+  'bipolar-2':'বাইপোলার ডিসঅর্ডার II',
+  'cyclothymic':'সাইক্লোথাইমিক ডিসঅর্ডার',
+  'substance-induced-bipolar':'পদার্থ-প্ররোচিত বাইপোলার',
+  'dmdd':'DMDD',
+  'major-depression':'মেজর ডিপ্রেসিভ ডিসঅর্ডার',
+  'persistent-depressive':'দীর্ঘস্থায়ী বিষণ্নতা ব্যাধি',
+  'pmdd':'PMDD',
+  'substance-induced-depressive':'পদার্থ-প্ররোচিত বিষণ্নতা',
+  'separation-anxiety':'বিচ্ছেদ উদ্বেগ ব্যাধি',
+  'selective-mutism':'নির্বাচনী মৌনতা',
+  'specific-phobia':'নির্দিষ্ট ফোবিয়া',
+  'social-anxiety':'সামাজিক উদ্বেগ ব্যাধি',
+  'panic-disorder':'প্যানিক ডিসঅর্ডার',
+  'agoraphobia':'অ্যাগোরাফোবিয়া',
+  'gad':'সাধারণীকৃত উদ্বেগ ব্যাধি',
+  'ocd':'OCD',
+  'body-dysmorphic':'বডি ডিসমর্ফিক ডিসঅর্ডার',
+  'hoarding':'হোর্ডিং ডিসঅর্ডার',
+  'trichotillomania':'ট্রাইকোটিলোম্যানিয়া',
+  'excoriation':'এক্সকোরিয়েশন ডিসঅর্ডার',
+  'reactive-attachment':'রিঅ্যাক্টিভ অ্যাটাচমেন্ট ডিসঅর্ডার',
+  'disinhibited-social':'ডিসইনহিবিটেড সোশ্যাল এনগেজমেন্ট ডিসঅর্ডার',
+  'ptsd':'PTSD',
+  'acute-stress':'অ্যাকিউট স্ট্রেস ডিসঅর্ডার',
+  'adjustment-disorders':'অ্যাডজাস্টমেন্ট ডিসঅর্ডার',
+  'did':'DID',
+  'dissociative-amnesia':'ডিসোসিয়েটিভ অ্যামনেসিয়া',
+  'depersonalization':'ডিপার্সোনালাইজেশন ডিসঅর্ডার',
+  'somatic-symptom':'সোমাটিক সিম্পটম ডিসঅর্ডার',
+  'illness-anxiety':'ইলনেস অ্যাংজাইটি ডিসঅর্ডার',
+  'conversion-disorder':'কনভার্সন ডিসঅর্ডার',
+  'factitious-disorder':'ফ্যাক্টিশাস ডিসঅর্ডার',
+  'pica':'পিকা',
+  'rumination':'রুমিনেশন ডিসঅর্ডার',
+  'arfid':'ARFID',
+  'anorexia-nervosa':'অ্যানোরেক্সিয়া নার্ভোসা',
+  'bulimia-nervosa':'বুলিমিয়া নার্ভোসা',
+  'binge-eating':'বিঞ্জ-ইটিং ডিসঅর্ডার',
+  'insomnia':'ইনসমনিয়া ডিসঅর্ডার',
+  'hypersomnolence':'হাইপারসোমনোলেন্স',
+  'narcolepsy':'ন্যার্কোলেপ্সি',
+  'circadian-rhythm':'সার্কাডিয়ান রিদম ডিসঅর্ডার',
+  'nightmare-disorder':'নাইটমেয়ার ডিসঅর্ডার',
+  'rem-sleep':'REM স্লিপ বিহেভিয়ার ডিসঅর্ডার',
+  'restless-legs':'রেস্টলেস লেগস সিন্ড্রোম',
+  'paranoid-pd':'প্যারানয়েড পার্সোনালিটি ডিসঅর্ডার',
+  'schizoid-pd':'স্কিজয়েড পার্সোনালিটি ডিসঅর্ডার',
+  'antisocial-pd':'অ্যান্টিসোশ্যাল পার্সোনালিটি ডিসঅর্ডার',
+  'borderline-pd':'বর্ডারলাইন পার্সোনালিটি ডিসঅর্ডার',
+  'histrionic-pd':'হিস্ট্রিওনিক পার্সোনালিটি ডিসঅর্ডার',
+  'narcissistic-pd':'নার্সিসিস্টিক পার্সোনালিটি ডিসঅর্ডার',
+  'avoidant-pd':'অ্যাভয়েডেন্ট পার্সোনালিটি ডিসঅর্ডার',
+  'dependent-pd':'ডিপেন্ডেন্ট পার্সোনালিটি ডিসঅর্ডার',
+  'ocpd':'OCPD',
+  'delirium':'ডেলিরিয়াম',
+  'alzheimers-ncd':"আলঝেইমার'স NCD",
+  'vascular-ncd':'ভাস্কুলার NCD',
+  'lewy-body-ncd':'লিউই বডি NCD',
+  'frontotemporal-ncd':'ফ্রন্টোটেম্পোরাল NCD',
+  'tbi-ncd':'TBI জনিত NCD',
+  'parkinsons-ncd':"পার্কিনসন'স NCD",
+  'classical-conditioning':'ক্লাসিকাল কন্ডিশনিং',
+  'operant-conditioning':'অপারেন্ট কন্ডিশনিং',
+  'cognitive-dissonance':'কগনিটিভ ডিসোনেন্স',
+  'defense-mechanisms':'প্রতিরক্ষামূলক প্রক্রিয়া',
+  'maslow-hierarchy':"মাসলোর চাহিদার ক্রম",
+};
+
+const disorderBn = DISORDER_NAMES_BN[disorderId] || disorderId;
+const catBn = CAT_NAMES[catId] || catId;
+const typeInfo = TYPE_LABELS[contentType] || TYPE_LABELS.neuro;
+
+// Set up UI
+document.title = `${disorderBn} — ${typeInfo.bn} | মনপাঠ`;
+document.getElementById('bc-cat').textContent = catBn;
+document.getElementById('bc-cat').href = `category.html?cat=${catId}`;
+document.getElementById('bc-disorder').textContent = disorderBn;
+document.getElementById('article-title').textContent = `${disorderBn} — ${typeInfo.bn}`;
+const badge = document.getElementById('ct-badge');
+badge.textContent = typeInfo.emoji + ' ' + typeInfo.bn;
+badge.className = 'content-type-badge ' + typeInfo.badge;
+document.getElementById('back-to-cat').onclick = () => window.location.href = `category.html?cat=${catId}`;
+
+// Related content links
+function buildRelated(){
+  const types = ['neuro','psychological','dsm5'];
+  const labels = {neuro:'স্নায়ুবিক কারণ',psychological:'সাইকোলজিকাল কারণ',dsm5:'DSM-5 ক্রাইটেরিয়া'};
+  const sec = document.getElementById('related-section');
+  const grid = document.getElementById('related-cards');
+  types.filter(t=>t!==contentType).forEach(t=>{
+    const card = document.createElement('div');
+    card.className='related-card';
+    card.innerHTML=`<div class="rc-type">${labels[t]}</div><div class="rc-title">${disorderBn} — ${labels[t]}</div>`;
+    card.onclick=()=>window.open(`article.html?cat=${catId}&disorder=${disorderId}&type=${t}`,'_blank');
+    grid.appendChild(card);
+  });
+  sec.style.display='block';
+}
+
+// Build the prompt for Claude
+function buildPrompt(){
+  const prompts = {
+    neuro: `তুমি একজন বিশেষজ্ঞ মনোবিজ্ঞানী ও স্নায়ুবিজ্ঞানী। 
+
+"${disorderBn}" ডিসঅর্ডারের **স্নায়ুবিক কারণ** নিয়ে বাংলায় একটি বিস্তারিত, শিক্ষামূলক আর্টিকেল লেখো।
+
+আর্টিকেলে অবশ্যই থাকবে:
+1. সংক্ষিপ্ত ভূমিকা (এই ডিসঅর্ডার কী এবং স্নায়ুতন্ত্রের সাথে এর সম্পর্ক)
+2. মস্তিষ্কের কোন কোন অংশ প্রভাবিত হয় (নিউরোঅ্যানাটমি)
+3. নিউরোট্রান্সমিটারের ভূমিকা (যেমন: ডোপামিন, সেরোটোনিন, GABA ইত্যাদি যেগুলো প্রযোজ্য)
+4. জেনেটিক ও বংশগত কারণ
+5. নিউরোডেভেলপমেন্টাল কারণ
+6. ইমেজিং গবেষণার ফলাফল (fMRI, EEG, PET scan সংক্রান্ত গবেষণা)
+7. DSM-5 এবং আধুনিক গবেষণার আলোকে গুরুত্বপূর্ণ তথ্য
+
+HTML ফরম্যাটে লেখো। শুধু <h2>, <h3>, <p>, <ul>, <li>, <strong>, <em>, <blockquote> ট্যাগ ব্যবহার করো। বাংলায় লেখো, প্রয়োজনে ইংরেজি টার্ম বন্ধনীতে দাও। আর্টিকেলটি কমপক্ষে ৬০০ শব্দের হতে হবে।`,
+
+    psychological: `তুমি একজন বিশেষজ্ঞ ক্লিনিকাল মনোবিজ্ঞানী।
+
+"${disorderBn}" ডিসঅর্ডারের **সাইকোলজিকাল কারণ** নিয়ে বাংলায় একটি বিস্তারিত আর্টিকেল লেখো।
+
+আর্টিকেলে অবশ্যই থাকবে:
+1. সংক্ষিপ্ত ভূমিকা
+2. মনোবিশ্লেষণমূলক দৃষ্টিভঙ্গি (Psychoanalytic Perspective)
+3. আচরণগত কারণ (Behavioral Causes) — শেখা ও কন্ডিশনিং
+4. জ্ঞানীয় কারণ (Cognitive Factors) — চিন্তার ধরন, বিশ্বাস ব্যবস্থা
+5. পরিবেশগত ও সামাজিক কারণ (পরিবার, সমাজ, ট্রমা, শৈশব অভিজ্ঞতা)
+6. আত্মসম্মান ও পরিচয়ের ভূমিকা
+7. প্রধান মনোবৈজ্ঞানিক তত্ত্বগুলো (যেমন: Beck-এর Cognitive Theory, Freud-এর মডেল ইত্যাদি প্রযোজ্য হলে)
+
+HTML ফরম্যাটে লেখো। শুধু <h2>, <h3>, <p>, <ul>, <li>, <strong>, <em>, <blockquote> ট্যাগ ব্যবহার করো। বাংলায় লেখো, প্রয়োজনে ইংরেজি টার্ম বন্ধনীতে দাও। কমপক্ষে ৬০০ শব্দ।`,
+
+    dsm5: `তুমি একজন ক্লিনিকাল মনোবিজ্ঞানী ও DSM-5 বিশেষজ্ঞ।
+
+"${disorderBn}" ডিসঅর্ডারের **DSM-5 অনুযায়ী ডায়াগনসিস ক্রাইটেরিয়া** নিয়ে বাংলায় একটি বিস্তারিত আর্টিকেল লেখো।
+
+আর্টিকেলে অবশ্যই থাকবে:
+1. সংক্ষিপ্ত ভূমিকা ও সংজ্ঞা
+2. DSM-5 এর মূল Criteria গুলো (Criterion A, B, C... যেগুলো প্রযোজ্য) বাংলায় বিস্তারিতভাবে
+3. Specifier গুলো (যদি থাকে)
+4. Differential Diagnosis (কোন কোন ডিসঅর্ডারের সাথে পার্থক্য করতে হবে)
+5. মাত্রা ও তীব্রতা (Severity Levels)
+6. বয়স ও লিঙ্গ বিষয়ক বিশেষ বিবেচনা
+7. ICD-11 এর সাথে তুলনা (সংক্ষেপে)
+8. নির্ণয়ে ব্যবহৃত মূল্যায়ন পদ্ধতি
+
+HTML ফরম্যাটে লেখো। শুধু <h2>, <h3>, <p>, <ul>, <li>, <strong>, <em>, <blockquote> ট্যাগ ব্যবহার করো। বাংলায় লেখো, প্রয়োজনে ইংরেজি টার্ম বন্ধনীতে দাও। কমপক্ষে ৭০০ শব্দ।`
+  };
+  return prompts[contentType] || prompts.neuro;
+}
+
+async function generateContent(){
+  document.getElementById('loading-state').style.display='block';
+  document.getElementById('error-state').style.display='none';
+  document.getElementById('article-content').style.display='none';
+
+  const loadingMsgs = [
+    'DSM-5 তথ্যভান্ডার থেকে তথ্য সংগ্রহ করা হচ্ছে...',
+    'বাংলায় কন্টেন্ট তৈরি হচ্ছে...',
+    'আর্টিকেল সাজানো হচ্ছে...',
+    'প্রায় হয়ে গেছে...',
+  ];
+  let msgIdx=0;
+  const msgEl = document.getElementById('loading-msg');
+  const msgTimer = setInterval(()=>{ msgEl.textContent = loadingMsgs[Math.min(++msgIdx,loadingMsgs.length-1)]; }, 4000);
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:2000,
+        system: 'তুমি ঢাকা কলেজ সাইকোলজি সোসাইটির একজন বিশেষজ্ঞ লেখক। তুমি সবসময় বাংলায় লেখো। শুধুমাত্র HTML কন্টেন্ট দাও, কোনো মার্কডাউন বা ```html ব্লক ব্যবহার করো না। সরাসরি <h2> দিয়ে শুরু করো।',
+        messages:[{role:'user', content: buildPrompt()}]
+      })
+    });
+    clearInterval(msgTimer);
+    if(!resp.ok) throw new Error('API error: ' + resp.status);
+    const data = await resp.json();
+    const html = data.content?.[0]?.text || '';
+    if(!html.trim()) throw new Error('Empty response');
+
+    document.getElementById('article-content').innerHTML = html;
+    document.getElementById('article-content').style.display='block';
+    document.getElementById('loading-state').style.display='none';
+    buildRelated();
+  } catch(err){
+    clearInterval(msgTimer);
+    console.error(err);
+    document.getElementById('loading-state').style.display='none';
+    document.getElementById('error-state').style.display='block';
+  }
+}
+
+generateContent();
+</script>
+</body>
+</html>

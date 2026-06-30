@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>মনের খাতা — Dhaka College Psychology Society</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&family=Hind+Siliguri:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --forest: #1B4332;
+      --forest-deep: #102A20;
+      --sage: #74A57F;
+      --sage-soft: #AEC9A8;
+      --paper: #F6F3EA;
+      --paper-line: #E4DEC9;
+      --ink: #20251F;
+      --ink-soft: #52584C;
+      --coral: #C97B5C;
+      --mint: #E9EFE3;
+      --radius: 2px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Hind Siliguri', 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    [data-en] {
+      display: none;
+    }
+
+    body.lang-en [data-bn] {
+      display: none;
+    }
+
+    body.lang-en span[data-en] { display: inline; }
+    body.lang-en h1[data-en], body.lang-en h2[data-en],
+    body.lang-en h3[data-en], body.lang-en h4[data-en],
+    body.lang-en h5[data-en], body.lang-en p[data-en],
+    body.lang-en div[data-en], body.lang-en a[data-en],
+    body.lang-en li[data-en] { display: block; }
+
+    body.lang-en [data-en-block] {
+      display: block;
+    }
+
+    /* ===== top notebook rule ===== */
+    .ruled-top {
+      height: 10px;
+      background: repeating-linear-gradient(90deg, var(--forest) 0 22px, transparent 0 28px);
+      opacity: .85;
+    }
+
+    /* ===== header ===== */
+    header {
+      background: var(--forest);
+      color: var(--mint);
+      padding: 18px 6vw 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 3px solid var(--forest-deep);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      flex: none;
+    }
+
+    .brand-text {
+      line-height: 1.05;
+    }
+
+    .brand-text .bn-name {
+      font-family: 'Tiro Bangla', serif;
+      font-size: 1.18rem;
+      color: #fff;
+    }
+
+    .brand-text .sub {
+      font-family: 'Inter', sans-serif;
+      font-size: .66rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--sage-soft);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    nav a {
+      color: var(--mint);
+      text-decoration: none;
+      font-size: .92rem;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      background: var(--coral);
+      transition: width .25s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .lang-toggle {
+      display: flex;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .25);
+      border-radius: 20px;
+      padding: 3px;
+      font-size: .78rem;
+    }
+
+    .lang-toggle button {
+      border: none;
+      background: transparent;
+      color: var(--mint);
+      padding: 5px 13px;
+      border-radius: 18px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+      transition: .2s;
+    }
+
+    .lang-toggle button.active {
+      background: var(--coral);
+      color: #fff;
+    }
+
+    /* ===== hero ===== */
+    .hero {
+      position: relative;
+      padding: 84px 6vw 96px;
+      background: var(--mint);
+      overflow: hidden;
+      border-bottom: 1px solid var(--paper-line);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: .74rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--forest);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: var(--coral);
+    }
+
+    .hero h1 {
+      font-family: 'Tiro Bangla', serif;
+      font-size: clamp(2.3rem, 4.2vw, 3.6rem);
+      line-height: 1.22;
+      margin: 0 0 22px;
+      color: var(--forest-deep);
+    }
+
+    body.lang-en .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 560;
+    }
+
+    .hero p.lede {
+      font-size: 1.08rem;
+      color: var(--ink-soft);
+      max-width: 520px;
+      margin: 0 0 30px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 26px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .92rem;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .btn-primary {
+      background: var(--forest);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(27, 67, 50, .25);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--forest);
+      border: 1.5px solid var(--forest);
+    }
+
+    .btn-ghost:hover {
+      background: var(--forest);
+      color: #fff;
+    }
+
+    /* leaf/mind vein motif - signature element */
+    .hero-art {
+      position: relative;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-art svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ===== stats strip ===== */
+    .stats {
+      background: var(--forest-deep);
+      color: var(--mint);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 0 6vw;
+    }
+
+    .stat {
+      padding: 30px 14px;
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat b {
+      display: block;
+      font-family: 'Tiro Bangla', serif;
+      font-size: 1.9rem;
+      color: #fff;
+    }
+
+    body.lang-en .stat b {
+      font-family: 'Fraunces', serif;
+    }
+
+    .stat span {
+      font-size: .74rem;
+      color: var(--sage-soft);
+      letter-spacing: .04em;
+    }
+
+    /* ===== section frame ===== */
+    section {
+      padding: 78px 6vw;
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 42px;
+      border-bottom: 1.5px solid var(--paper-line);
+      padding-bottom: 18px;
+    }
+
+    .section-head h2 {
+      font-family: 'Tiro Bangla', serif;
+      font-size: 1.9rem;
+      color: var(--forest-deep);
+      margin: 0;
+    }
+
+    body.lang-en .section-head h2 {
+      font-family: 'Fraunces', serif;
+    }
+
+    .section-head .tag {
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--coral);
+      font-weight: 600;
+    }
+
+    .viewall {
+      font-size: .85rem;
+      color: var(--forest);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1px solid var(--forest);
+      padding-bottom: 2px;
+    }
+
+    /* ===== featured grid (lobes / thematic categories) ===== */
+    .lobes {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+    }
+
+    .lobe {
+      background: #fff;
+      border: 1px solid var(--paper-line);
+      border-radius: var(--radius);
+      padding: 20px 14px;
+      text-align: center;
+      transition: .2s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 150px;
+    }
+    .lobe h4 { margin: 0 0 6px; min-height: 2.4em; display: flex; align-items: center; justify-content: center; }
+    .lobe p { margin: 0; flex: 1; }
+
+    .lobe:hover {
+      border-color: var(--sage);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 22px rgba(27, 67, 50, .08);
+    }
+
+    .lobe .icon {
+      width: 34px;
+      height: 34px;
+      margin: 0 auto 12px;
+      color: var(--forest);
+    }
+
+    .lobe h4 {
+      font-size: .86rem;
+      margin: 0 0 4px;
+      color: var(--forest-deep);
+      font-weight: 700;
+    }
+
+    .lobe p {
+      font-size: .72rem;
+      color: var(--ink-soft);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ===== blog cards ===== */
+    .posts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .post {
+      background: #fff;
+      border: 1px solid var(--paper-line);
+      display: flex;
+      flex-direction: column;
+      transition: .25s;
+    }
+
+    .post:hover {
+      box-shadow: 0 14px 30px rgba(27, 67, 50, .1);
+      transform: translateY(-4px);
+    }
+
+    .post-thumb {
+      height: 160px;
+      background: linear-gradient(135deg, var(--sage-soft), var(--mint));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .post-thumb svg {
+      position: absolute;
+      opacity: .5;
+    }
+
+    .post-body {
+      padding: 22px 22px 26px;
+    }
+
+    .post-cat {
+      font-size: .68rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--coral);
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .post h3 {
+      font-family: 'Tiro Bangla', serif;
+      font-size: 1.18rem;
+      line-height: 1.4;
+      margin: 0 0 10px;
+      color: var(--forest-deep);
+    }
+
+    body.lang-en .post h3 {
+      font-family: 'Fraunces', serif;
+    }
+
+    .post p {
+      font-size: .86rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      margin: 0 0 16px;
+    }
+
+    .post-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .74rem;
+      color: var(--ink-soft);
+      border-top: 1px dashed var(--paper-line);
+      padding-top: 14px;
+    }
+
+    .post-meta .author {
+      font-weight: 600;
+      color: var(--forest);
+    }
+
+    /* ===== quote / pull strip ===== */
+    .pull {
+      background: var(--forest);
+      color: var(--mint);
+      text-align: center;
+      padding: 80px 8vw;
+      position: relative;
+    }
+
+    .pull blockquote {
+      font-family: 'Tiro Bangla', serif;
+      font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+      line-height: 1.55;
+      max-width: 780px;
+      margin: 0 auto 18px;
+      color: #fff;
+    }
+
+    body.lang-en .pull blockquote {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .pull cite {
+      font-size: .82rem;
+      color: var(--sage-soft);
+      font-style: normal;
+    }
+
+    /* ===== newsletter ===== */
+    .newsletter {
+      background: var(--mint);
+      border-top: 1px solid var(--paper-line);
+      border-bottom: 1px solid var(--paper-line);
+    }
+
+    .news-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .news-inner h2 {
+      font-family: 'Tiro Bangla', serif;
+      color: var(--forest-deep);
+      font-size: 1.6rem;
+      margin: 0 0 12px;
+    }
+
+    body.lang-en .news-inner h2 {
+      font-family: 'Fraunces', serif;
+    }
+
+    .news-inner p {
+      color: var(--ink-soft);
+      margin: 0 0 26px;
+    }
+
+    .news-form {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .news-form input {
+      flex: 1;
+      min-width: 220px;
+      padding: 13px 18px;
+      border: 1.5px solid var(--forest);
+      border-radius: 30px;
+      font-family: inherit;
+      font-size: .92rem;
+      background: #fff;
+    }
+
+    .news-form input:focus {
+      outline: 2px solid var(--coral);
+      outline-offset: 2px;
+    }
+
+    /* ===== footer ===== */
+    footer {
+      background: var(--forest-deep);
+      color: var(--sage-soft);
+      padding: 54px 6vw 26px;
+    }
+
+    .foot-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto 36px;
+    }
+
+    .foot-grid h5 {
+      color: #fff;
+      font-size: .85rem;
+      margin: 0 0 16px;
+      letter-spacing: .05em;
+    }
+
+    .foot-grid p,
+    .foot-grid a {
+      color: var(--sage-soft);
+      font-size: .84rem;
+      line-height: 1.8;
+      text-decoration: none;
+      display: block;
+    }
+
+    .foot-grid a:hover {
+      color: #fff;
+    }
+
+    .foot-bottom {
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      padding-top: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      font-size: .76rem;
+      color: rgba(174, 201, 168, .6);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @media (max-width:980px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .hero-art {
+        max-width: 280px;
+        margin: 0 auto;
+      }
+
+      .lobes {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .posts {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .foot-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width:640px) {
+      nav {
+        display: none;
+      }
+
+      .lobes {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .posts {
+        grid-template-columns: 1fr;
+      }
+
+      .foot-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="ruled-top"></div>
+
+  <header>
+    <div class="brand">
+      <img src="log - transparent.png" height="70px" width="70px">
+      <div class="brand-text">
+        <div class="bn-name" data-bn>মনপাঠ</div> 
+        <div class="bn-name" data-en>MonoPath</div>
+        <div class="sub" data-bn>ঢাকা কলেজ সাইকোলজি সোসাইটি</div>
+        <div class="sub" data-en>Dhaka College Psychology Society</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#lobes" data-bn>কন্টেন্ট টাইপ</a><a href="#lobes" data-en>Content Type</a>
+      <a href="#posts" data-bn>লেখা</a><a href="#posts" data-en>Articles</a>
+      <a href="#about" data-bn>আমাদের কথা</a><a href="#about" data-en>About</a>
+      <a href="#newsletter" data-bn>যোগাযোগ</a><a href="#newsletter" data-en>Subscribe</a>
+    </nav>
+    <div class="lang-toggle">
+      <button id="btn-bn" class="active" onclick="setLang('bn')">বাং</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">
+          <span data-bn>স্কিল বেসড সাইকোলজি হাব</span>
+          <span data-en>Skill-Based Psychology Hub</span>
+        </div>
+        <h1>
+          <span data-bn>Psychological Content,<br>Know About Psychology</span>
+          <span data-en>Psychological Content,<br>Know About Psychology</span>
+        </h1>
+        <p class="lede">
+          <span data-bn>ঢাকা কলেজ সাইকোলজি সোসাইটির গবেষণা, প্রবন্ধ ও শেখার সম্পদ — মানসিক স্বাস্থ্য, আচরণ ও সমাজ নিয়ে
+            বাংলা ভাষায় লেখা, DSM-5 এর ভিত্তিতে সাজানো।</span>
+          <span data-en>Research, essays, and learning resources from the Dhaka College Psychology Society — writing on
+            mental health, behaviour, and society, organised around six skill-based lobes.</span>
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#posts" data-bn>লেখা পড়ুন</a>
+          <a class="btn btn-primary" href="#posts" data-en>Read the articles</a>
+          <a class="btn btn-ghost" href="#about" data-bn>সোসাইটি সম্পর্কে জানুন</a>
+          <a class="btn btn-ghost" href="#about" data-en>About the society</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="theme.svg" height="500px" width="500px">
+      </div>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><b>6</b><span data-bn>স্কিল লোব</span><span data-en>Skill Lobes</span></div>
+    <div class="stat"><b>50+</b><span data-bn>প্রকাশিত লেখা</span><span data-en>Published Articles</span></div>
+    <div class="stat"><b>1200+</b><span data-bn>পাঠক সদস্য</span><span data-en>Member Readers</span></div>
+    <div class="stat"><b>2024</b><span data-bn>প্রতিষ্ঠাকাল</span><span data-en>Founded</span></div>
+  </div>
+
+  <section id="lobes">
+    <div class="section-inner">
+      <div class="section-head">
+        <h2><span data-bn>কন্টেন্ট টাইপ</span><span data-en>Content Type</span></h2>
+        <span class="tag" data-bn>লিখার কাঠামো</span>
+        <span class="tag" data-en>How the content is organised</span>
+      </div>
+      <div class="lobes">
+        <!-- <Psychological Content> -->
+        <div class="lobe psycontent">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2c4 0 7 3 7 7v2c0 4-3 7-7 7s-7-3-7-7V9c0-4 3-7 7-7z" />
+          </svg>
+          <h4 data-bn>সাইকোলজিকাল কন্টেন্ট</h4>
+          <h4 data-en>Psychological Content</h4>
+          <p data-bn>Psychological Phenomena</p>
+          <p data-en>Psychological Phenomena</p>
+        </div>
+        <!-- Intellectual Disabilities -->
+        <div class="lobe intellectual">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 21c0-4 4-6 8-6s8 2 8 6" />
+            <path d="M10 8h4M12 6v4" />
+          </svg>
+          <h4 data-bn>বুদ্ধিবৃত্তিক প্রতিবন্ধকতা</h4>
+          <h4 data-en>Intellectual Disabilities</h4>
+          <p data-bn>মূল্যায়ন, পুনর্বাসন ও দক্ষতা উন্নয়ন</p>
+          <p data-en>Assessment, rehabilitation & adaptive skills</p>
+        </div>
+
+        <!-- Communication Disorders -->
+        <div class="lobe" onclick="openCategory('communication-disorders')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 3v12" />
+            <path d="M8 7a4 4 0 108 0" />
+            <path d="M5 21h14" />
+          </svg>
+          <h4 data-bn>যোগাযোগজনিত ব্যাধি</h4>
+          <h4 data-en>Communication Disorders</h4>
+          <p data-bn>ভাষা, বাক ও যোগাযোগ মূল্যায়ন</p>
+          <p data-en>Speech, language & communication assessment</p>
+        </div>
+
+        <!-- Autism Spectrum Disorder -->
+        <div class="lobe" onclick="openCategory('autism-spectrum')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2l2.5 5L20 8l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1z" />
+          </svg>
+          <h4 data-bn>অটিজম স্পেকট্রাম ডিসঅর্ডার</h4>
+          <h4 data-en>Autism Spectrum Disorder</h4>
+          <p data-bn>প্রাথমিক শনাক্তকরণ ও আচরণগত সহায়তা</p>
+          <p data-en>Early screening & behavioral intervention</p>
+        </div>
+
+        <!-- ADHD -->
+        <div class="lobe">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2v20" />
+            <path d="M2 12h20" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+          <h4 data-bn>মনোযোগ ঘাটতি ও অতিসক্রিয়তা</h4>
+          <h4 data-en>Attention-Deficit/Hyperactivity Disorder</h4>
+          <p data-bn>মনোযোগ, আচরণ ও নির্বাহী কার্যকারিতা মূল্যায়ন</p>
+          <p data-en>Attention, behavior & executive functioning</p>
+        </div>
+
+        <!-- Specific Learning Disorder -->
+        <div class="lobe" onclick="openCategory('specific-learning')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 4h10a4 4 0 014 4v12H9a4 4 0 00-4 4z" />
+          </svg>
+          <h4 data-bn>নির্দিষ্ট শেখার ব্যাধি</h4>
+          <h4 data-en>Specific Learning Disorder</h4>
+          <p data-bn>পড়া, লেখা ও গণিত দক্ষতার মূল্যায়ন</p>
+          <p data-en>Reading, writing & math assessment</p>
+        </div>
+
+        <!-- Motor Disorders -->
+        <div class="lobe" onclick="openCategory('motor-disorders')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M8 4l8 8" />
+            <path d="M16 4L8 12" />
+            <path d="M4 20l4-4" />
+            <path d="M20 20l-4-4" />
+          </svg>
+          <h4 data-bn>মোটর ডিসঅর্ডার</h4>
+          <h4 data-en>Motor Disorders</h4>
+          <p data-bn>চলাচল, সমন্বয় ও মোটর দক্ষতা মূল্যায়ন</p>
+          <p data-en>Motor coordination & movement assessment</p>
+        </div>
+
+        <!-- Schizophrenia Spectrum -->
+        <div class="lobe" onclick="openCategory('schizophrenia-spectrum')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2l8 4v6c0 5-3 8-8 10-5-2-8-5-8-10V6z" />
+          </svg>
+          <h4 data-bn>সিজোফ্রেনিয়া স্পেকট্রাম</h4>
+          <h4 data-en>Schizophrenia Spectrum</h4>
+          <p data-bn>সাইকোসিস মূল্যায়ন ও চিকিৎসা পরিকল্পনা</p>
+          <p data-en>Psychosis assessment & treatment planning</p>
+        </div>
+
+        <!-- Bipolar Disorders -->
+        <div class="lobe" onclick="openCategory('bipolar-disorders')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 3a6 6 0 000 12 6 6 0 010 6" />
+          </svg>
+          <h4 data-bn>বাইপোলার ও সংশ্লিষ্ট ব্যাধি</h4>
+          <h4 data-en>Bipolar Disorders</h4>
+          <p data-bn>মুড পরিবর্তন মূল্যায়ন ও ব্যবস্থাপনা</p>
+          <p data-en>Mood assessment & management</p>
+        </div>
+
+        <!-- Depressive Disorders -->
+        <div class="lobe" onclick="openCategory('depressive-disorders')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 20c6-4 9-7 9-11a5 5 0 00-9-3 5 5 0 00-9 3c0 4 3 7 9 11z" />
+          </svg>
+          <h4 data-bn>বিষণ্নতাজনিত ব্যাধি</h4>
+          <h4 data-en>Depressive Disorders</h4>
+          <p data-bn>বিষণ্নতা মূল্যায়ন ও মনোসামাজিক সহায়তা</p>
+          <p data-en>Depression assessment & psychotherapy</p>
+        </div>
+
+        <!-- Anxiety Disorders -->
+        <div class="lobe" onclick="openCategory('anxiety-disorders')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2l10 18H2z" />
+            <circle cx="12" cy="17" r="1" />
+          </svg>
+          <h4 data-bn>উদ্বেগজনিত ব্যাধি</h4>
+          <h4 data-en>Anxiety Disorders</h4>
+          <p data-bn>উদ্বেগ, ভীতি ও স্ট্রেস ব্যবস্থাপনা</p>
+          <p data-en>Anxiety, phobia & stress management</p>
+        </div>
+
+        <!-- OCD -->
+        <div class="lobe" onclick="openCategory('ocd')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="8" />
+            <path d="M12 8v4l3 2" />
+          </svg>
+          <h4 data-bn>অবসেসিভ-কম্পালসিভ ডিসঅর্ডার</h4>
+          <h4 data-en>Obsessive-Compulsive Disorder</h4>
+          <p data-bn>আবেশ ও বাধ্যতামূলক আচরণের চিকিৎসা</p>
+          <p data-en>Obsessions & compulsions management</p>
+        </div>
+
+        <!-- Trauma Disorders -->
+        <div class="lobe" onclick="openCategory('trauma-disorders')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2l9 16H3z" />
+          </svg>
+          <h4 data-bn>ট্রমা ও স্ট্রেসজনিত ব্যাধি</h4>
+          <h4 data-en>Trauma & Stressor-Related Disorders</h4>
+          <p data-bn>PTSD, ট্রমা পুনরুদ্ধার ও কাউন্সেলিং</p>
+          <p data-en>PTSD recovery & trauma therapy</p>
+        </div>
+
+        <!-- Dissociative Disorders -->
+        <div class="lobe" onclick="openCategory('dissociative-disorders')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="8" cy="12" r="4" />
+            <circle cx="16" cy="12" r="4" />
+          </svg>
+          <h4 data-bn>ডিসোসিয়েটিভ ডিসঅর্ডার</h4>
+          <h4 data-en>Dissociative Disorders</h4>
+          <p data-bn>পরিচয়, স্মৃতি ও সচেতনতা মূল্যায়ন</p>
+          <p data-en>Identity, memory & consciousness assessment</p>
+        </div>
+
+        <!-- Somatic Symptom Disorders -->
+        <div class="lobe" onclick="openCategory('somatic-disorders')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2v20" />
+            <path d="M5 8h14" />
+          </svg>
+          <h4 data-bn>সোমাটিক উপসর্গজনিত ব্যাধি</h4>
+          <h4 data-en>Somatic Symptom Disorders</h4>
+          <p data-bn>শারীরিক উপসর্গ ও মানসিক মূল্যায়ন</p>
+          <p data-en>Mind-body symptom assessment</p>
+        </div>
+
+        <!-- Feeding & Eating Disorders -->
+        <div class="lobe" onclick="openCategory('eating-disorders')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M7 2v9" />
+            <path d="M17 2v20" />
+          </svg>
+          <h4 data-bn>খাদ্যগ্রহণজনিত ব্যাধি</h4>
+          <h4 data-en>Feeding & Eating Disorders</h4>
+          <p data-bn>খাদ্যাভ্যাস ও পুষ্টি বিষয়ক মানসিক সহায়তা</p>
+          <p data-en>Eating behavior & nutritional support</p>
+        </div>
+
+        <!-- Sleep Disorders -->
+        <div class="lobe" onclick="openCategory('sleep-disorders')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M18 14a6 6 0 11-6-10 7 7 0 006 10z" />
+          </svg>
+          <h4 data-bn>ঘুমজনিত ব্যাধি</h4>
+          <h4 data-en>Sleep-Wake Disorders</h4>
+          <p data-bn>ঘুমের সমস্যা মূল্যায়ন ও চিকিৎসা</p>
+          <p data-en>Sleep assessment & intervention</p>
+        </div>
+
+        <!-- Personality Disorders -->
+        <div class="lobe" onclick="openCategory('personality-disorders')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 21c2-3 5-5 8-5s6 2 8 5" />
+          </svg>
+          <h4 data-bn>ব্যক্তিত্বজনিত ব্যাধি</h4>
+          <h4 data-en>Personality Disorders</h4>
+          <p data-bn>ব্যক্তিত্ব মূল্যায়ন ও দীর্ঘমেয়াদি থেরাপি</p>
+          <p data-en>Personality assessment & psychotherapy</p>
+        </div>
+
+        <!-- Neurocognitive Disorders -->
+        <div class="lobe" onclick="openCategory('neurocognitive-disorders')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2c4 0 7 3 7 7v2c0 4-3 7-7 7s-7-3-7-7V9c0-4 3-7 7-7z" />
+          </svg>
+          <h4 data-bn>নিউরোকগনিটিভ ডিসঅর্ডার</h4>
+          <h4 data-en>Neurocognitive Disorders</h4>
+          <p data-bn>স্মৃতি, জ্ঞানীয় কার্যকারিতা ও ডিমেনশিয়া মূল্যায়ন</p>
+          <p data-en>Memory, cognition & dementia assessment</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="posts" style="background:#fff;">
+    <div class="section-inner">
+      <div class="section-head">
+        <h2><span data-bn>সাম্প্রতিক লেখা</span><span data-en>Latest Articles</span></h2>
+        <a class="viewall" href="#" data-bn>সব লেখা দেখুন →</a>
+        <a class="viewall" href="#" data-en>View all articles →</a>
+      </div>
+      <div class="posts">
+
+        <article class="post" onclick="openArticle('intellectual-disabilities','intellectual-disability','neuro')" style="cursor:pointer">
+          <div class="post-thumb">
+            <img src="neuro.jpg" height="180px" width="360px">
+          </div>
+          <div class="post-body">
+            <span class="post-cat" data-bn>বুদ্ধিবৃত্তিক প্রতিবন্ধকতা</span><span class="post-cat" data-en>Intellectual Disabilities</span>
+            <h3 data-bn> বুদ্ধিবৃত্তিক প্রতিবন্ধকতার স্নায়ুবিক কারণ </h3>
+            <h3 data-en>Neurological Cause of Intelluctual Disability</h3>
+            <p data-bn>Intellectual disability (বুদ্ধিবৃত্তিক প্রতিবন্ধকতা) হলো এমন একটি অবস্থা যেখানে একজন ব্যক্তির বুদ্ধিবৃত্তিক ক্ষমতা (IQ) স্বাভাবিকের তুলনায় কম থাকে </p>
+            <p data-en>Intellectual disability is a condition in which a person's intellectual ability (IQ) is lower than normal.</p>
+            <div class="post-meta">
+              <span class="author" data-bn>মো. ইমন হোসেন</span><span class="author" data-en>Md. Imon Hossain</span>
+              <span data-bn>৮ মিনিট পড়া</span><span data-en>8 min read</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="post" onclick="openArticle('intellectual-disabilities','intellectual-disability','psychological')" style="cursor:pointer">
+          <div class="post-thumb">
+            <svg viewBox="0 0 200 160" width="100%" height="100%">
+              <circle cx="60" cy="80" r="30" stroke="#1B4332" stroke-width="2" fill="none" />
+              <circle cx="130" cy="80" r="20" stroke="#C97B5C" stroke-width="2" fill="none" />
+            </svg>
+          </div>
+          <div class="post-body">
+            <span class="post-cat" data-bn>বুদ্ধিবৃত্তিক প্রতিবন্ধকতা</span><span class="post-cat" data-en>Intellectual Disabilities</span>
+            <h3 data-bn>বুদ্ধিবৃত্তিক প্রতিবন্ধকতার সাইকোলজিকাল কারণ</h3>
+            <h3 data-en>Psychological Cause of Intelluctual Disability</h3>
+            <p data-bn>Intellectual Disability শুধুমাত্র জেনেটিক বা স্নায়ুবিক কারণেই হয় না; এই সমস্যার পেছনে জৈবিক কারণের পাশাপাশি বিভিন্ন Psychological, Social এবং Environmental factors কাজ করে।</p>
+            <p data-en>Intellectual disability is not caused solely by genetic or neurological factors; alongside biological causes, various psychological, social, and environmental factors also play a role.
+            </p>
+            <div class="post-meta">
+              <span class="author" data-bn>শাহিন আক্তার </span><span class="author" data-en>Sahin Akter</span>
+              <span data-bn>৬ মিনিট পড়া</span><span data-en>6 min read</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="post" onclick="openArticle('intellectual-disabilities','intellectual-disability','dsm5')" style="cursor:pointer">
+          <div class="post-thumb">
+            <svg viewBox="0 0 200 160" width="100%" height="100%">
+              <rect x="40" y="40" width="40" height="40" stroke="#1B4332" stroke-width="2" fill="none" />
+              <rect x="120" y="80" width="30" height="30" stroke="#C97B5C" stroke-width="2" fill="none" />
+            </svg>
+          </div>
+          <div class="post-body">
+            <span class="post-cat" data-bn>বুদ্ধিবৃত্তিক প্রতিবন্ধকতা</span><span class="post-cat" data-en>Intellectual Disabilities</span>
+            <h3 data-bn>বুদ্ধিবৃত্তিক প্রতিবন্ধকতার লক্ষণ - According to DSM-5 </h3>
+            <h3 data-en>Diagnosis Criteria of Intelluctual Disability acouding to DSM-5 </h3>
+            <p data-bn>ডিএসএম-৫ (DSM-5) অনুযায়ী Intellectual Disability (বুদ্ধিবৃত্তিক প্রতিবন্ধকতা) নির্ণয়ের জন্য তিনটি মূল ক্রাইটেরিয়া (A, B, C) অনুসরণ করা হয়। </p>
+            <p data-en>According to the DSM-5, three main criteria (A, B, and C) are followed to diagnose intellectual disability.</p>
+            <div class="post-meta">
+              <span class="author" data-bn>মো. ইমন হোসেন</span><span class="author" data-en>Md. Imon Hossain</span>
+              <span data-bn>১০ মিনিট পড়া</span><span data-en>10 min read</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="pull">
+    <blockquote>
+      <span data-bn>“Know ThySelf”</span>
+      <span data-en>"Know ThySelf"</span>
+    </blockquote>
+    <cite data-bn>— Socraties</cite>
+    <cite data-en>— Socraties</cite>
+  </div>
+
+  <section id="about" style="background:#fff;">
+    <div class="section-inner" style="max-width:760px;">
+      <div class="section-head" style="border-bottom:none;">
+        <h2><span data-bn>আমাদের কথা</span><span data-en>About Us</span></h2>
+      </div>
+      <p style="font-size:1rem; line-height:1.8; color:var(--ink-soft);">
+        <span data-bn>ঢাকা কলেজ সাইকোলজি সোসাইটি (DCPS) ঢাকা কলেজের মনোবিজ্ঞান বিভাগের শিক্ষার্থীদের একটি সক্রিয় সংগঠন।
+          আমরা গবেষণা, সচেতনতা ও দক্ষতা বিকাশের মাধ্যমে মনোবিজ্ঞানকে শ্রেণিকক্ষের বাইরে নিয়ে আসার চেষ্টা করি। "স্কিল
+          বেসড সাইকোলজি হাব" আমাদের একটি উদ্যোগ, যেখানে ছয়টি থিম্যাটিক লোবের আওতায় শিক্ষার্থীদের লেখা, গবেষণা ও শেখার
+          রিসোর্স প্রকাশ করা হয়।</span>
+        <span data-en>The Dhaka College Psychology Society (DCPS) is a student-led organisation within the Psychology
+          Department at Dhaka College. We bring psychology beyond the classroom through research, awareness, and
+          skill-building. Our Skill-Based Psychology Hub publishes student writing, research, and learning resources
+          across six thematic lobes.</span>
+      </p>
+    </div>
+  </section>
+
+  <section id="newsletter" class="newsletter">
+    <div class="news-inner">
+      <h2 data-bn>নতুন লেখা পান ইমেইলে</h2>
+      <h2 data-en>Get new articles by email</h2>
+      <p data-bn>সপ্তাহে একবার, কোনো স্প্যাম নয় — শুধু মনের খবর।</p>
+      <p data-en>Once a week, no spam — just notes on the mind.</p>
+      <form class="news-form"
+        onsubmit="event.preventDefault(); this.querySelector('button').textContent = this.lastElementChild.dataset[document.body.classList.contains('lang-en')?'en':'bn'];">
+        <input type="email" required placeholder="you@example.com" data-bn-placeholder="আপনার ইমেইল"
+          data-en-placeholder="Your email">
+        <button class="btn btn-primary" type="submit" data-bn="সাবস্ক্রাইব করেছেন ✓" data-en="Subscribed ✓"
+          data-bn-default style="border:none; cursor:pointer;">সাবস্ক্রাইব করুন</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <h5 data-bn>মনপাঠ</h5>
+        <h5 data-en>MonoPath</h5>
+        <p data-bn>ঢাকা কলেজ সাইকোলজি সোসাইটির কন্টেন্ট ও ব্লগ প্ল্যাটফর্ম। মানসিক স্বাস্থ্য, আচরণ ও সমাজ নিয়ে বাংলা ও
+          ইংরেজিতে লেখা।</p>
+        <p data-en>The content and blog platform of the Dhaka College Psychology Society — writing on mental health,
+          behaviour, and society in Bengali and English.</p>
+      </div>
+     
+      <div>
+        <h5 data-bn>সংগঠন</h5>
+        <h5 data-en>Organisation</h5>
+        <a href="#about" data-bn>আমাদের কথা</a><a href="#about" data-en>About</a>
+        <a href="#posts" data-bn>লেখা</a><a href="#posts" data-en>Articles</a>
+        <a href="#newsletter" data-bn>নিউজলেটার</a><a href="#newsletter" data-en>Newsletter</a>
+      </div>
+      <div>
+        <h5 data-bn>যোগাযোগ</h5>
+        <h5 data-en>Contact</h5>
+        <p data-bn>ঢাকা কলেজ, মনোবিজ্ঞান বিভাগ</p>
+        <p data-en>Dhaka College, Dept. of Psychology</p>
+        <a href="#" data-bn>ফেসবুক পেজ</a><a href="#" data-en>Facebook Page</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-bn>© ২০২৬ ঢাকা কলেজ সাইকোলজি সোসাইটি। সর্বস্বত্ব সংরক্ষিত।</span>
+      <span data-en>© 2026 Dhaka College Psychology Society. All rights reserved.</span>
+      <span data-bn>মনপাঠ</span>
+      <span data-en>MonoPath</span>
+    </div>
+  </footer>
+
+  <script>
+
+    function openCategory(catId) {
+      window.open('category.html?cat=' + catId, '_blank');
+    }
+    function openArticle(catId, disorderId, contentType) {
+      window.open('article.html?cat=' + catId + '&disorder=' + disorderId + '&type=' + contentType, '_blank');
+    }
+    function setLang(lang) {
+      document.body.classList.toggle('lang-en', lang === 'en');
+      document.getElementById('btn-bn').classList.toggle('active', lang === 'bn');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang === 'en' ? 'en' : 'bn';
+      document.querySelectorAll('input[data-bn-placeholder]').forEach(el => {
+        el.placeholder = lang === 'en' ? el.dataset.enPlaceholder : el.dataset.bnPlaceholder;
+      });
+    }
+  </script>
+
+</body>
+
+</html>
